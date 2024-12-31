@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  max-width: 1280px;
+
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.cv-container {
+  width: 60%;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 20px;
+  width: 40%;
+}
+
+.edit-section {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: rgb(245, 245, 245);
+
+  border: 1px solid black;
+}
+
+.edit-section > h2 {
+  margin-bottom: 10px;
+}
+
+.personal-details {
+  border: 1px solid black;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.input-group input {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(223, 223, 223);
+  border: none;
+  outline: none;
+}
