@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import InputGroup from './components/InputGroup'
-
+import PersonalDetailsEdit from './components/PersonalDetailsEdit';
+import EducationEdit from './components/EducationEdit';
 
 function App() {
   const [formData, setFormData] = useState({
@@ -10,16 +10,49 @@ function App() {
     phoneNumber: '+63 123 456 7890',
     address: 'Dubai, UAE',
   });
-
+ 
+  // Handle personal info input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
+    
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
+  const initialEducation = [
+    { 
+      school: 'Mapua University',
+      degree: 'Bachelor of Science in Computer Science',
+      'start-date': 'Aug, 2023',
+      'end-date': 'Present',
+    }
+  ]
+  
+  const [educationList, setEducationList] = useState(initialEducation);
+  const [showForm, setShowForm] = useState(false);
+
+  // Handle closing the form
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  const handleAddEducation = (e) => {
+    e.preventDefault();
+    console.log(e)
+
+    const formData = new FormData(e.target);
+    const newEducation = {
+      school: formData.get('school'),
+      degree: formData.get('degree'),
+      'start-date': formData.get('start-date'),
+      'end-date': formData.get('end-date')
+    }
+    setEducationList([...educationList, newEducation]);
+    handleCloseForm();
+  }
+ 
   return (
     <>
       <div className='edit-container'>
@@ -28,20 +61,21 @@ function App() {
           <button>Load Example</button>
         </div>
 
-        <div className='personal-details edit-section '>
-          <h2>Personal Details</h2>
-          <div className="input-container">
-            <InputGroup label="Full Name" type="text" id="full-name" name="fullName" value={formData.fullName} onChange={handleInputChange} />
-            <InputGroup label="Email" type="text" id="email" name="email" value={formData.email} onChange={handleInputChange} />
-            <InputGroup label="Phone Number" type="text" id="phone-number" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange}/>
-            <InputGroup label="Address" type="text" id="address" name="address" value={formData.address} onChange={handleInputChange}  />
-          </div>
-        </div>
-        
-        <div className='edit-section '>
-          <h2>Education</h2>
-          
-        </div>
+        <PersonalDetailsEdit
+          formData={formData}
+          handleInputChange={handleInputChange}
+        >  
+        </PersonalDetailsEdit>
+
+        <EducationEdit
+          educationList={educationList}
+          setEducationList={setEducationList}
+          showForm={showForm}
+          setShowForm={setShowForm}
+          handleCloseForm={handleCloseForm}
+          handleAddEducation={handleAddEducation}
+        >  
+        </EducationEdit>
         
         <div className='edit-section '>
           <h2>Experience</h2>
@@ -65,6 +99,25 @@ function App() {
               <p>{formData.address}</p>
             </div>
           </div>
+        </div>
+        <div className='education-info cv-section'>
+          <h2>Education</h2>
+          <ul>
+            {educationList.map((education, index) => (
+              <li key={index}>
+                <div>
+                  <h3>{education.school}</h3>
+                  <p>{education.degree}</p>
+                </div>
+                <p>
+                    {education['start-date']} - {education['end-date']}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className='cv-section'>
+            <h2>Experience</h2>
         </div>
       </div>
     </>
