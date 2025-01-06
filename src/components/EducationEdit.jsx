@@ -37,16 +37,27 @@ export default function EducationEdit({ educationList, setEducationList, showFor
         };
         setEducationList(updatedList);
     }
+
+    // Handle deleting an education item
+    const handleDeleteEducation = (index) => {
+        if (window.confirm("Are you sure you want to delete this education?")) {
+            const updatedEducationList = educationList.filter((_, i) => i !== index);
+            setEducationList(updatedEducationList);
+        }
+    };
     
     return (
         <div className='education-input edit-section '>
             <h2>Education</h2>
             {!showForm && (
-              <ul>
+              <ul className='educations-container'>
                 {educationList.map((education, index) => (
                     <li key={index}>
                         <p>{education.school}</p>
-                        <button onClick={() => handleShowForm('edit', index)}>Edit</button>
+                        <div>
+                            <button onClick={() => handleShowForm('edit', index)}><i className="fa-regular fa-pen-to-square"></i></button>
+                            <button onClick={() => handleDeleteEducation(index)}><i className="fa-solid fa-trash"></i></button>
+                        </div>
                     </li> 
                 ))}
               </ul>
