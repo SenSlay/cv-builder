@@ -90,7 +90,7 @@ export default function EducationEdit({ educationList, setEducationList, showFor
                 </form>
             ))}
             {!showForm && (
-                <button onClick={() => handleShowForm('add')}>Add Education</button>
+                <button className='add-button' onClick={() => handleShowForm('add')}><i className="fa-solid fa-plus"></i>  Education</button>
             )}
         </div>
     )
