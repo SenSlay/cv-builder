@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import InputGroup from './InputGroup';
 
-export default function EducationEdit({ educationList, setEducationList, showForm, setShowForm,handleCloseForm, handleAddEducation }) {
+export default function EducationEdit({ educationList, setEducationList, showForm, setShowForm, handleCloseForm, handleAddEducation }) {
     const [mode, setMode] = useState(null);
     const [formIndex, setFormIndex] = useState(0);
     const initialDataRef = useRef(null);
@@ -13,7 +13,10 @@ export default function EducationEdit({ educationList, setEducationList, showFor
             setFormIndex(index)
         }
         setMode(mode)
-        setShowForm(true);
+        setShowForm({
+            ...showForm,
+            'education': true
+        });
     };
 
     // Handle cancel form
@@ -49,7 +52,7 @@ export default function EducationEdit({ educationList, setEducationList, showFor
     return (
         <div className='education-input edit-section '>
             <h2>Education</h2>
-            {!showForm && (
+            {!showForm.education && (
               <ul className='educations-container'>
                 {educationList.map((education, index) => (
                     <li key={index}>
@@ -62,7 +65,7 @@ export default function EducationEdit({ educationList, setEducationList, showFor
                 ))}
               </ul>
             )}
-            {showForm && (mode === 'edit' ? (
+            {showForm.education && (mode === 'edit' ? (
                 <form className='education-form'>
                     <InputGroup label='School' type='text' id='school' name='school' value={educationList[formIndex].school} onChange={handleInputChange}></InputGroup>
                     <InputGroup label='Degree' type='text' id='degree' name='degree' value={educationList[formIndex].degree} onChange={handleInputChange}></InputGroup>
@@ -72,7 +75,7 @@ export default function EducationEdit({ educationList, setEducationList, showFor
                     </div>
                     <div className='form-button-container'>
                         <button type='button' onClick={handleCancelForm} className='form-cancel'>Cancel</button>
-                        <button type='submit' onClick={handleCloseForm} className='form-save'>Save Changes</button>
+                        <button type='submit' onClick={() => handleCloseForm('education')} className='form-save'>Save Changes</button>
                     </div>
                 </form>
             ) : (
@@ -84,12 +87,12 @@ export default function EducationEdit({ educationList, setEducationList, showFor
                         <InputGroup label='end-date' type='text' id='end-date' name='end-date' ></InputGroup>
                     </div>
                     <div className='form-button-container'>
-                        <button type='button' onClick={handleCloseForm} className='form-cancel'>Cancel</button>
+                        <button type='button' onClick={() => handleCloseForm('education')} className='form-cancel'>Cancel</button>
                         <button type='submit' className='form-save'>Add Education</button>
                     </div>
                 </form>
             ))}
-            {!showForm && (
+            {!showForm.education && (
                 <button className='add-button' onClick={() => handleShowForm('add')}><i className="fa-solid fa-plus"></i>  Education</button>
             )}
         </div>
