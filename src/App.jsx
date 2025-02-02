@@ -80,7 +80,8 @@ function App() {
     handleCloseForm();
   }
 
-  const handleAddList = (e, list, newItem, setList) => {
+  // Handle adding new item for given list
+  const handleAddItem = (e, list, newItem, setList) => {
     e.preventDefault();
 
     setList([...list, newItem]);
@@ -117,7 +118,7 @@ function App() {
           showForm={showForm}
           setShowForm={setShowForm}
           handleCloseForm={handleCloseForm}
-          handleAddList={handleAddList}
+          handleAddExperience={handleAddItem}
         >
         </ExperienceEdit>
       </div>
