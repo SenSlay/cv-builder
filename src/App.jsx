@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import PersonalDetailsEdit from './components/PersonalDetailsEdit';
 import EducationEdit from './components/EducationEdit';
+import ExperienceEdit from './components/ExperienceEdit'; 
 
 function App() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ function App() {
     });
   };
 
+  // Education
   const initialEducation = [
     { 
       school: 'Mapua University',
@@ -31,16 +33,41 @@ function App() {
   ]
   
   const [educationList, setEducationList] = useState(initialEducation);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState({
+    education: false,
+    experience: false
+  });
+
+  // Experience
+  const exampleExperience = [
+    {
+      company: 'Daniel Lets make coffee',
+      position: 'Customer Service Representative',
+      'start-date': 'Oct 10',
+      'end-date': 'Dec 10',
+      description: 'Handled customer inquiries. Deez nuts, damn daniel, skibidi sigma.'
+    },
+    {
+      company: 'Daniel Thanks For the coffee',
+      position: 'Customer Service Representative',
+      'start-date': 'Oct 23',
+      'end-date': 'Dec 10',
+      description: 'Handled customer inquiries. Deez nuts, damn daniel, skibidi sigma.'
+    }
+  ]
+
+  const [experienceList, setExperienceList] = useState(exampleExperience);
 
   // Handle closing the form
-  const handleCloseForm = () => {
-    setShowForm(false);
+  const handleCloseForm = (form) => {
+    setShowForm({
+      ...showForm, 
+      [form]: false,
+    });
   };
 
   const handleAddEducation = (e) => {
     e.preventDefault();
-    console.log(e)
 
     const formData = new FormData(e.target);
     const newEducation = {
@@ -51,6 +78,13 @@ function App() {
     }
     setEducationList([...educationList, newEducation]);
     handleCloseForm();
+  }
+
+  const handleAddList = (e, list, newItem, setList) => {
+    e.preventDefault();
+
+    setList([...list, newItem]);
+    handleCloseForm(e.target.name);
   }
  
   return (
@@ -77,10 +111,15 @@ function App() {
         >  
         </EducationEdit>
         
-        <div className='edit-section '>
-          <h2>Experience</h2>
-          
-        </div>
+        <ExperienceEdit
+          experienceList={experienceList}
+          setExperienceList={setExperienceList}
+          showForm={showForm}
+          setShowForm={setShowForm}
+          handleCloseForm={handleCloseForm}
+          handleAddList={handleAddList}
+        >
+        </ExperienceEdit>
       </div>
       <div className='cv-container'>
         <div className='cv-header'>
@@ -116,8 +155,20 @@ function App() {
             ))}
           </ul>
         </div>
-        <div className='cv-section'>
+        <div className='experience-info cv-section'>
             <h2>Experience</h2>
+            <ul>
+              {experienceList.map((experience, index) => (
+                <li key={index}>
+                  <div>
+                    <h3>{experience.company}</h3>
+                    <h4>{experience.position}</h4>
+                    <p>{experience.description}</p>
+                  </div>
+                  <p><span>{experience['start-date']}</span> - <span>{experience['end-date']}</span></p>
+                </li>
+              ))}
+            </ul>
         </div>
       </div>
     </>
