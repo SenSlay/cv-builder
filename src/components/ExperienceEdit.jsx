@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import InputGroup from './InputGroup';
 
-export default function ExperienceEdit({ experienceList, setExperienceList, showForm, setShowForm, handleCloseForm, handleAddList }) {
+export default function ExperienceEdit({ experienceList, setExperienceList, showForm, setShowForm, handleCloseForm, handleAddExperience }) {
     const [mode, setMode] = useState(null);
     const [formIndex, setFormIndex] = useState(0);
     const [newExperience, setNewExperience] = useState({
@@ -77,7 +77,7 @@ export default function ExperienceEdit({ experienceList, setExperienceList, show
               </ul>
             )}
             {showForm.experience && (
-                <form name='experience' onSubmit={mode === 'edit' ? null : (e) => handleAddList(e, experienceList, newExperience, setExperienceList)} className='experience-form'>
+                <form name='experience' onSubmit={mode === 'edit' ? null : (e) => handleAddExperience(e, experienceList, newExperience, setExperienceList)} className='experience-form'>
                     <InputGroup label='Company' type='text' id='company' name='company' value={mode === 'edit' ? experienceList[formIndex].company : newExperience.company} onChange={mode === 'edit' ? handleInputChange : handleNewInputChange}></InputGroup>
                     <InputGroup label='Position' type='text' id='position' name='position' value={mode === 'edit' ? experienceList[formIndex].position : newExperience.position} onChange={mode === 'edit' ? handleInputChange : handleNewInputChange}></InputGroup>
                     <div className='start-end-container'>
