@@ -4,6 +4,12 @@ import InputGroup from './InputGroup';
 export default function EducationEdit({ educationList, setEducationList, showForm, setShowForm, handleCloseForm, handleAddEducation }) {
     const [mode, setMode] = useState(null);
     const [formIndex, setFormIndex] = useState(0);
+    const [newEducation, setNewEducation] = useState({
+        school: '',
+        degree: '',
+        'start-date': '',
+        'end-date': '',
+    });
     const initialDataRef = useRef(null);
 
     // Handle show form
@@ -41,6 +47,16 @@ export default function EducationEdit({ educationList, setEducationList, showFor
         setEducationList(updatedList);
     }
 
+    // Handle new item input
+    const handleNewInputChange = (e) => {
+        const { name, value } = e.target;
+    
+        setNewEducation({
+            ...newEducation,
+            [name]: value,
+        });
+    }
+
     // Handle deleting an education item
     const handleDeleteEducation = (index) => {
         if (window.confirm("Are you sure you want to delete this education?")) {
@@ -65,33 +81,20 @@ export default function EducationEdit({ educationList, setEducationList, showFor
                 ))}
               </ul>
             )}
-            {showForm.education && (mode === 'edit' ? (
-                <form className='education-form'>
-                    <InputGroup label='School' type='text' id='school' name='school' value={educationList[formIndex].school} onChange={handleInputChange}></InputGroup>
-                    <InputGroup label='Degree' type='text' id='degree' name='degree' value={educationList[formIndex].degree} onChange={handleInputChange}></InputGroup>
+            {showForm.education && (
+                <form name='education' className='education-form' onSubmit={mode === 'edit' ? null : (e) => handleAddEducation(e, educationList, newEducation, setEducationList)}>
+                    <InputGroup label='School' type='text' id='school' name='school' value={mode === 'edit' ? educationList[formIndex].school : newEducation.school} onChange={mode === 'edit' ? handleInputChange : handleNewInputChange} required={'required'}></InputGroup>
+                    <InputGroup label='Degree' type='text' id='degree' name='degree' value={mode === 'edit' ? educationList[formIndex].degree : newEducation.degree} onChange={mode === 'edit' ? handleInputChange : handleNewInputChange}></InputGroup>
                     <div className='start-end-container'>
-                        <InputGroup label='start-date' type='text' id='start-date' name='start-date' value={educationList[formIndex]['start-date']} onChange={handleInputChange}></InputGroup>
-                        <InputGroup label='end-date' type='text' id='end-date' name='end-date' value={educationList[formIndex]['end-date']} onChange={handleInputChange}></InputGroup>
+                        <InputGroup label='start-date' type='text' id='start-date' name='start-date' value={mode === 'edit' ? educationList[formIndex]['start-date'] : newEducation['start-date']} onChange={mode === 'edit' ? handleInputChange : handleNewInputChange}></InputGroup>
+                        <InputGroup label='end-date' type='text' id='end-date' name='end-date' value={mode === 'edit' ? educationList[formIndex]['end-date'] : newEducation['end-date']} onChange={mode === 'edit' ? handleInputChange : handleNewInputChange}></InputGroup>
                     </div>
                     <div className='form-button-container'>
-                        <button type='button' onClick={handleCancelForm} className='form-cancel'>Cancel</button>
-                        <button type='submit' onClick={() => handleCloseForm('education')} className='form-save'>Save Changes</button>
+                        <button type='button' onClick={mode === 'edit' ? handleCancelForm : () => handleCloseForm('education')} className='form-cancel'>Cancel</button>
+                        <button type='submit' onClick={mode === 'edit' ? () => handleCloseForm('education') : null} className='form-save'>{mode === 'edit' ? 'Save Changes' : 'Add Education'}</button>
                     </div>
                 </form>
-            ) : (
-                <form onSubmit={handleAddEducation} className='education-form'>
-                    <InputGroup label='School' type='text' id='school' name='school' ></InputGroup>
-                    <InputGroup label='Degree' type='text' id='degree' name='degree' ></InputGroup>
-                    <div className='start-end-container'>
-                        <InputGroup label='start-date' type='text' id='start-date' name='start-date' ></InputGroup>
-                        <InputGroup label='end-date' type='text' id='end-date' name='end-date' ></InputGroup>
-                    </div>
-                    <div className='form-button-container'>
-                        <button type='button' onClick={() => handleCloseForm('education')} className='form-cancel'>Cancel</button>
-                        <button type='submit' className='form-save'>Add Education</button>
-                    </div>
-                </form>
-            ))}
+            )}
             {!showForm.education && (
                 <button className='add-button' onClick={() => handleShowForm('add')}><i className="fa-solid fa-plus"></i>  Education</button>
             )}
