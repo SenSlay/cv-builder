@@ -41,7 +41,7 @@ export default function ExperienceEdit({ experienceList, setExperienceList, show
         });
     }   
 
-    // Handle input change
+    // Handle existing input change
     const handleInputChange = (e) => {
         const updatedList = [...experienceList];
         updatedList[formIndex] = {
@@ -51,6 +51,7 @@ export default function ExperienceEdit({ experienceList, setExperienceList, show
         setExperienceList(updatedList);
     }
 
+    // Handle new item input
     const handleNewInputChange = (e) => {
         const { name, value } = e.target;
     
@@ -59,6 +60,14 @@ export default function ExperienceEdit({ experienceList, setExperienceList, show
             [name]: value,
         });
     }
+
+    // Handle deleting an education item
+    const handleDeleteEducation = (index) => {
+        if (window.confirm("Are you sure you want to delete this experience?")) {
+            const updatedExpereienceList = experienceList.filter((_, i) => i !== index);
+            setExperienceList(updatedExpereienceList);
+        }
+    };
      
     return (
         <div className='experience-input edit-section'>
@@ -70,7 +79,7 @@ export default function ExperienceEdit({ experienceList, setExperienceList, show
                         <p>{experience.company}</p>
                         <div>
                             <button onClick={() => handleShowForm('edit', index)}><i className="fa-regular fa-pen-to-square"></i></button>
-                            <button onClick={null}><i className="fa-solid fa-trash"></i></button>
+                            <button onClick={() => handleDeleteEducation(index)}><i className="fa-solid fa-trash"></i></button>
                         </div>
                     </li> 
                 ))}
