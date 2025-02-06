@@ -66,20 +66,6 @@ function App() {
     });
   };
 
-  const handleAddEducation = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const newEducation = {
-      school: formData.get('school'),
-      degree: formData.get('degree'),
-      'start-date': formData.get('start-date'),
-      'end-date': formData.get('end-date')
-    }
-    setEducationList([...educationList, newEducation]);
-    handleCloseForm();
-  }
-
   // Handle adding new item for given list
   const handleAddItem = (e, list, newItem, setList) => {
     e.preventDefault();
@@ -108,7 +94,7 @@ function App() {
           showForm={showForm}
           setShowForm={setShowForm}
           handleCloseForm={handleCloseForm}
-          handleAddEducation={handleAddEducation}
+          handleAddEducation={handleAddItem}
         >  
         </EducationEdit>
         
