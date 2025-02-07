@@ -41,19 +41,20 @@ export default function useFormLogic(initialList) {
 
   // Handle new item input
   const handleNewInputChange = (e,  newItem, setNewItem) => {
-      const { name, value } = e.target;
+    const { name, value } = e.target;
 
-      setNewItem({
-        ...newItem,
-        [name]: value,
-      });
-    }   
+    setNewItem({
+      ...newItem,
+      [name]: value,
+    });
+  }   
 
   // Handle adding new item for given list
-  const handleAddItem = (e, newItem) => {
+  const handleAddItem = (e, newItem, setNewItem, initialNewItemState) => {
     e.preventDefault();
 
     setList([...list, newItem]);
+    setNewItem(initialNewItemState)
     handleCloseForm(e.target.name);
   };
 
