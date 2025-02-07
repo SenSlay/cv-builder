@@ -3,6 +3,7 @@ import './App.css'
 import PersonalDetailsEdit from './components/PersonalDetailsEdit';
 import EducationEdit from './components/EducationEdit';
 import ExperienceEdit from './components/ExperienceEdit'; 
+import useFormLogic from './utils/useFormLogic';
 
 function App() {
   const [formData, setFormData] = useState({
@@ -56,8 +57,6 @@ function App() {
     }
   ]
 
-  const [experienceList, setExperienceList] = useState(exampleExperience);
-
   // Handle closing the form
   const handleCloseForm = (form) => {
     setShowForm({
@@ -73,6 +72,20 @@ function App() {
     setList([...list, newItem]);
     handleCloseForm(e.target.name);
   }
+
+  const {
+    list: experienceList,
+    showForm: experienceShowForm,
+    mode: experienceMode,
+    formIndex: experienceFormIndex,
+    handleShowForm: handleExperienceShowForm,
+    handleCloseForm: handleExperienceCloseForm,
+    handleCancelForm: handleExperienceCancelForm,
+    handleInputChange: handleExperienceInputChange,
+    handleNewInputChange: handleExperienceNewInputChange,
+    handleAddItem: handleAddExperience,
+    handleDeleteItem: handleExperienceDeleteItem,
+  } = useFormLogic(exampleExperience);
  
   return (
     <>
@@ -100,11 +113,16 @@ function App() {
         
         <ExperienceEdit
           experienceList={experienceList}
-          setExperienceList={setExperienceList}
-          showForm={showForm}
-          setShowForm={setShowForm}
-          handleCloseForm={handleCloseForm}
-          handleAddExperience={handleAddItem}
+          showForm={experienceShowForm}
+          mode={experienceMode}
+          formIndex={experienceFormIndex}
+          handleShowForm={handleExperienceShowForm}
+          handleCloseForm={handleExperienceCloseForm}
+          handleCancelForm={handleExperienceCancelForm}
+          handleInputChange={handleExperienceInputChange}
+          handleNewInputChange={handleExperienceNewInputChange}
+          handleAddItem={handleAddExperience}
+          handleDeleteItem={handleExperienceDeleteItem}
         >
         </ExperienceEdit>
       </div>
