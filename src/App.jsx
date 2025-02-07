@@ -4,6 +4,7 @@ import PersonalDetailsEdit from './components/PersonalDetailsEdit';
 import EducationEdit from './components/EducationEdit';
 import ExperienceEdit from './components/ExperienceEdit'; 
 import ProjectsEdit from './components/ProjectsEdit';
+import SkillsEdit from './components/SkillsEdit';
 import useFormLogic from './utils/useFormLogic';
 
 function App() {
@@ -63,6 +64,14 @@ function App() {
     }
   ]
 
+  // Example skills data
+  const exampleSkill = [
+    {
+      category: 'Coding Languages',
+      skills: 'Javascript, HTML/CSS, React, Python',
+    }
+  ]
+
   // Education section state and functions
   const {
     list: educationList,
@@ -107,6 +116,21 @@ function App() {
     handleAddItem: handleAddProject,
     handleDeleteItem: handleProjectDeleteItem,
   } = useFormLogic(exampleProject);
+
+  // Skills section state and functions
+  const {
+    list: skillList,
+    showForm: skillShowForm,
+    mode: skillMode,
+    formIndex: skillFormIndex,
+    handleShowForm: handleSkillShowForm,
+    handleCloseForm: handleSkillCloseForm,
+    handleCancelForm: handleSkillCancelForm,
+    handleInputChange: handleSkillInputChange,
+    handleNewInputChange: handleSkillNewInputChange,
+    handleAddItem: handleAddSkill,
+    handleDeleteItem: handleSkillDeleteItem,
+  } = useFormLogic(exampleSkill);
  
   return (
     <>
@@ -166,6 +190,20 @@ function App() {
           handleDeleteItem={handleProjectDeleteItem}
         >
         </ProjectsEdit>
+
+        <SkillsEdit
+          list={skillList}
+          showForm={skillShowForm}
+          mode={skillMode}
+          formIndex={skillFormIndex}
+          handleShowForm={handleSkillShowForm}
+          handleCloseForm={handleSkillCloseForm}
+          handleCancelForm={handleSkillCancelForm}
+          handleInputChange={handleSkillInputChange}
+          handleNewInputChange={handleSkillNewInputChange}
+          handleAddItem={handleAddSkill}
+          handleDeleteItem={handleSkillDeleteItem}
+        ></SkillsEdit>
       </div>
       <div className='cv-container'>
         <div className='cv-header'>
@@ -229,6 +267,19 @@ function App() {
                 <p>{project.description}</p>
                 </div>
                 <p className='date-container'>{project['start-date']} - {project['end-date']}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="skills-info cv-section">
+          <h2>Skills</h2>
+          <ul>
+            {skillList.map((skill, index) => (
+              <li key={index}>
+                <div>
+                  {skill.category && <p className='category-data'>{skill.category}:</p>}
+                  <p>{skill.skills}</p>
+                </div>
               </li>
             ))}
           </ul>
