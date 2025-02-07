@@ -15,11 +15,11 @@ export default function ExperienceEdit({ list, showForm, mode, formIndex, handle
         <div className='experience-input edit-section'>
             <h2>Experience</h2>
             {!showForm && (
-              <ul className='experience-container'>
+              <ul className='experience-container items-container'>
                 {list.map((experience, index) => (
                     <li key={index}>
                         <p>{experience.company}</p>
-                        <div>
+                        <div className='item-buttons'>
                             <button onClick={() => handleShowForm('edit', index)}><i className="fa-regular fa-pen-to-square"></i></button>
                             <button onClick={() => handleDeleteItem(index)}><i className="fa-solid fa-trash"></i></button>
                         </div>

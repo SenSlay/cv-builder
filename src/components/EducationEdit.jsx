@@ -14,11 +14,11 @@ export default function EducationEdit({ list, showForm, mode, formIndex, handleS
         <div className='education-input edit-section '>
             <h2>Education</h2>
             {!showForm && (
-              <ul className='educations-container'>
+              <ul className='educations-container items-container'>
                 {list.map((education, index) => (
                     <li key={index}>
                         <p>{education.school}</p>
-                        <div>
+                        <div className='item-buttons'>
                             <button onClick={() => handleShowForm('edit', index)}><i className="fa-regular fa-pen-to-square"></i></button>
                             <button onClick={() => handleDeleteItem(index)}><i className="fa-solid fa-trash"></i></button>
                         </div>
