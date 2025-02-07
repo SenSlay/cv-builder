@@ -3,6 +3,7 @@ import './App.css'
 import PersonalDetailsEdit from './components/PersonalDetailsEdit';
 import EducationEdit from './components/EducationEdit';
 import ExperienceEdit from './components/ExperienceEdit'; 
+import ProjectsEdit from './components/ProjectsEdit';
 import useFormLogic from './utils/useFormLogic';
 
 function App() {
@@ -33,21 +34,32 @@ function App() {
     }
   ]
 
-  // Experience section state and functions
+  // Example experience data
   const exampleExperience = [
     {
-      company: 'Daniel Lets make coffee',
+      company: 'Web Developer Intern',
+      position: 'Company',
+      'start-date': 'Oct 23',
+      'end-date': 'Dec 10',
+      description: 'Created front-end components using React.'
+    },
+    {
+      company: 'ProbeCX Ph',
       position: 'Customer Service Representative',
       'start-date': 'Oct 10',
       'end-date': 'Dec 10',
       description: 'Handled customer inquiries. Deez nuts, damn daniel, skibidi sigma.'
     },
+  ]
+
+  // Example projects data 
+  const exampleProject = [
     {
-      company: 'Daniel Thanks For the coffee',
-      position: 'Customer Service Representative',
-      'start-date': 'Oct 23',
-      'end-date': 'Dec 10',
-      description: 'Handled customer inquiries. Deez nuts, damn daniel, skibidi sigma.'
+      name: 'CV Builder',
+      tools: 'React, Javascript, HTML, CSS',
+      'start-date': 'Jan 1',
+      'end-date': 'Present',
+      description: 'Created using React'
     }
   ]
 
@@ -80,6 +92,21 @@ function App() {
     handleAddItem: handleAddExperience,
     handleDeleteItem: handleExperienceDeleteItem,
   } = useFormLogic(exampleExperience);
+
+  // Projects section state and functions
+  const {
+    list: projectList,
+    showForm: projectShowForm,
+    mode: projectMode,
+    formIndex: projectFormIndex,
+    handleShowForm: handleProjectShowForm,
+    handleCloseForm: handleProjectCloseForm,
+    handleCancelForm: handleProjectCancelForm,
+    handleInputChange: handleProjectInputChange,
+    handleNewInputChange: handleProjectNewInputChange,
+    handleAddItem: handleAddProject,
+    handleDeleteItem: handleProjectDeleteItem,
+  } = useFormLogic(exampleProject);
  
   return (
     <>
@@ -124,6 +151,21 @@ function App() {
           handleDeleteItem={handleExperienceDeleteItem}
         >
         </ExperienceEdit>
+
+        <ProjectsEdit
+          list={projectList}
+          showForm={projectShowForm}
+          mode={projectMode}
+          formIndex={projectFormIndex}
+          handleShowForm={handleProjectShowForm}
+          handleCloseForm={handleProjectCloseForm}
+          handleCancelForm={handleProjectCancelForm}
+          handleInputChange={handleProjectInputChange}
+          handleNewInputChange={handleProjectNewInputChange}
+          handleAddItem={handleAddProject}
+          handleDeleteItem={handleProjectDeleteItem}
+        >
+        </ProjectsEdit>
       </div>
       <div className='cv-container'>
         <div className='cv-header'>
@@ -152,7 +194,7 @@ function App() {
                   <h3>{education.school}</h3>
                   <p>{education.degree}</p>
                 </div>
-                <p>
+                <p className='date-container'>
                     {education['start-date']} - {education['end-date']}
                 </p>
               </li>
@@ -169,10 +211,27 @@ function App() {
                     <h4>{experience.position}</h4>
                     <p>{experience.description}</p>
                   </div>
-                  <p><span>{experience['start-date']}</span> - <span>{experience['end-date']}</span></p>
+                  <p className='date-container'>{experience['start-date']} - {experience['end-date']}</p>
                 </li>
               ))}
             </ul>
+        </div>
+        <div className="projects-info cv-section">
+          <h2>Projects</h2>
+          <ul>
+            {projectList.map((project, index) => (
+              <li key={index}>
+                <div>
+                  <div>
+                    <h3>{project.name}</h3>
+                    <p>| {project.tools}</p>
+                  </div>
+                <p>{project.description}</p>
+                </div>
+                <p className='date-container'>{project['start-date']} - {project['end-date']}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
