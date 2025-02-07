@@ -32,14 +32,8 @@ function App() {
       'end-date': 'Present',
     }
   ]
-  
-  const [educationList, setEducationList] = useState(initialEducation);
-  const [showForm, setShowForm] = useState({
-    education: false,
-    experience: false
-  });
 
-  // Experience
+  // Experience section state and functions
   const exampleExperience = [
     {
       company: 'Daniel Lets make coffee',
@@ -57,22 +51,22 @@ function App() {
     }
   ]
 
-  // Handle closing the form
-  const handleCloseForm = (form) => {
-    setShowForm({
-      ...showForm, 
-      [form]: false,
-    });
-  };
+  // Education section state and functions
+  const {
+    list: educationList,
+    showForm: educationShowForm,
+    mode: educationMode,
+    formIndex: educationFormIndex,
+    handleShowForm: handleEducationShowForm,
+    handleCloseForm: handleEducationCloseForm,
+    handleCancelForm: handleEducationCancelForm,
+    handleInputChange: handleEducationInputChange,
+    handleNewInputChange: handleEducationNewInputChange,
+    handleAddItem: handleAddEducation,
+    handleDeleteItem: handleEducationDeleteItem,
+  } = useFormLogic(initialEducation);
 
-  // Handle adding new item for given list
-  const handleAddItem = (e, list, newItem, setList) => {
-    e.preventDefault();
-
-    setList([...list, newItem]);
-    handleCloseForm(e.target.name);
-  }
-
+  // Experience section state and functions
   const {
     list: experienceList,
     showForm: experienceShowForm,
@@ -102,17 +96,22 @@ function App() {
         </PersonalDetailsEdit>
 
         <EducationEdit
-          educationList={educationList}
-          setEducationList={setEducationList}
-          showForm={showForm}
-          setShowForm={setShowForm}
-          handleCloseForm={handleCloseForm}
-          handleAddEducation={handleAddItem}
+          list={educationList}
+          showForm={educationShowForm}
+          mode={educationMode}
+          formIndex={educationFormIndex}
+          handleShowForm={handleEducationShowForm}
+          handleCloseForm={handleEducationCloseForm}
+          handleCancelForm={handleEducationCancelForm}
+          handleInputChange={handleEducationInputChange}
+          handleNewInputChange={handleEducationNewInputChange}
+          handleAddItem={handleAddEducation}
+          handleDeleteItem={handleEducationDeleteItem}
         >  
         </EducationEdit>
         
         <ExperienceEdit
-          experienceList={experienceList}
+          list={experienceList}
           showForm={experienceShowForm}
           mode={experienceMode}
           formIndex={experienceFormIndex}
