@@ -37,6 +37,10 @@ export default function useFormLogic(initialList) {
       updatedList[formIndex] = { ...updatedList[formIndex], [name]: value };
       setList(updatedList);
     }
+    else {
+      // For Personal Details and Summary
+      setList({...list, [name]: value})
+    }
   };
 
   // Handle new item input
