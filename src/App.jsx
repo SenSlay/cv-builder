@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import './App.css'
+import SummaryEdit from './components/SummaryEdit';
 import PersonalDetailsEdit from './components/PersonalDetailsEdit';
 import EducationEdit from './components/EducationEdit';
 import ExperienceEdit from './components/ExperienceEdit'; 
@@ -8,25 +8,21 @@ import SkillsEdit from './components/SkillsEdit';
 import useFormLogic from './utils/useFormLogic';
 
 function App() {
-  const [formData, setFormData] = useState({
-    fullName: 'Irvan Castro',
-    email: 'email@gmail.com',
-    phoneNumber: '+63 123 456 7890',
-    address: 'Dubai, UAE',
-  });
- 
-  // Handle personal info input change
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  // Example summary data
+  const exampleSummary = {
+    description: 'Im the goat'
+  }
 
-  // Education
-  const initialEducation = [
+  // Example personal details data
+  const examplePersonalDetails = {
+      fullName: 'Irvan Castro',
+      email: 'email@gmail.com',
+      phoneNumber: '+63 123 456 7890',
+      address: 'Dubai, UAE',
+  }
+
+  // Example education data
+  const exampleEducation = [
     { 
       school: 'Mapua University',
       degree: 'Bachelor of Science in Computer Science',
@@ -72,6 +68,18 @@ function App() {
     }
   ]
 
+  // Summary section state and functions
+  const {
+    list: summary,
+    handleInputChange: handleSummaryInputChange,
+  } = useFormLogic(exampleSummary);
+
+  // Personal Details section state and functions
+  const {
+    list: personalDetails,
+    handleInputChange: handlePDInputChange,
+  } = useFormLogic(examplePersonalDetails)
+
   // Education section state and functions
   const {
     list: educationList,
@@ -85,7 +93,7 @@ function App() {
     handleNewInputChange: handleEducationNewInputChange,
     handleAddItem: handleAddEducation,
     handleDeleteItem: handleEducationDeleteItem,
-  } = useFormLogic(initialEducation);
+  } = useFormLogic(exampleEducation);
 
   // Experience section state and functions
   const {
@@ -140,9 +148,15 @@ function App() {
           <button>Load Example</button>
         </div>
 
+        <SummaryEdit
+          data={summary}
+          handleInputChange={handleSummaryInputChange}
+        >
+        </SummaryEdit>
+
         <PersonalDetailsEdit
-          formData={formData}
-          handleInputChange={handleInputChange}
+          data = {personalDetails}
+          handleInputChange={handlePDInputChange}
         >  
         </PersonalDetailsEdit>
 
@@ -207,21 +221,25 @@ function App() {
       </div>
       <div className='cv-container'>
         <div className='cv-header'>
-          <h1>{formData.fullName}</h1>
+          <h1>{personalDetails.fullName}</h1>
           <div className='contact-info'>
             <div>
               <i className="fa-solid fa-envelope"></i>
-              <p>{formData.email}</p>
+              <p>{personalDetails.email}</p>
             </div>
             <div>
               <i className="fa-solid fa-phone"></i>
-              <p>{formData.phoneNumber}</p>
+              <p>{personalDetails.phoneNumber}</p>
             </div>
             <div>
               <i className="fa-solid fa-location-dot"></i>
-              <p>{formData.address}</p>
+              <p>{personalDetails.address}</p>
             </div>
           </div>
+        </div>
+        <div className='summary-info cv-section'>
+          <h2>Summary</h2>
+          <p>{summary.description}</p>
         </div>
         <div className='education-info cv-section'>
           <h2>Education</h2>
