@@ -24,7 +24,7 @@ export default function useFormLogic(initialList) {
   const handleCloseForm = () => {
     setShowForm(false);
   };
-  
+
   const handleCancelForm = () => {
     if (formIndex !== null) {
       const updatedList = [...list];
@@ -40,37 +40,36 @@ export default function useFormLogic(initialList) {
       const updatedList = [...list];
       updatedList[formIndex] = { ...updatedList[formIndex], [name]: value };
       setList(updatedList);
-    }
-    else {
+    } else {
       // For Personal Details and Summary
-      setList({...list, [name]: value})
+      setList({ ...list, [name]: value });
     }
   };
 
   // Handle new item input
-  const handleNewInputChange = (e,  newItem, setNewItem) => {
+  const handleNewInputChange = (e, newItem, setNewItem) => {
     const { name, value } = e.target;
 
     setNewItem({
       ...newItem,
       [name]: value,
     });
-  }   
+  };
 
   // Handle adding new item for given list
   const handleAddItem = (e, newItem, setNewItem, initialNewItemState) => {
     e.preventDefault();
 
     setList([...list, newItem]);
-    setNewItem(initialNewItemState)
+    setNewItem(initialNewItemState);
     handleCloseForm(e.target.name);
   };
 
   // Handle deleting an item
   const handleDeleteItem = (index) => {
-    if (window.confirm("Are you sure you want to delete this experience?")) {
-        const updatedList = list.filter((_, i) => i !== index);
-        setList(updatedList);
+    if (window.confirm('Are you sure you want to delete this experience?')) {
+      const updatedList = list.filter((_, i) => i !== index);
+      setList(updatedList);
     }
   };
 

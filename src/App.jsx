@@ -1,21 +1,29 @@
-import './App.css'
+import './App.css';
 import SummaryEdit from './components/SummaryEdit';
 import PersonalDetailsEdit from './components/PersonalDetailsEdit';
 import EducationEdit from './components/EducationEdit';
-import ExperienceEdit from './components/ExperienceEdit'; 
+import ExperienceEdit from './components/ExperienceEdit';
 import ProjectsEdit from './components/ProjectsEdit';
 import SkillsEdit from './components/SkillsEdit';
 import useFormLogic from './utils/useFormLogic';
-import { exampleSummary, examplePersonalDetails, exampleEducation, exampleExperience, exampleProject, exampleSkill, emptyDataCV } from './exampleCvData';
-import { useRef, useState} from "react";
-import { useReactToPrint } from "react-to-print";
+import {
+  exampleSummary,
+  examplePersonalDetails,
+  exampleEducation,
+  exampleExperience,
+  exampleProject,
+  exampleSkill,
+  emptyDataCV,
+} from './exampleCvData';
+import { useRef, useState } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import CV from './components/CV';
 
 function App() {
   const componentRef = useRef(null);
-  
+
   const handlePrint = useReactToPrint({
-    contentRef: componentRef, 
+    contentRef: componentRef,
   });
 
   // state for expand form
@@ -30,8 +38,8 @@ function App() {
 
   // Toggle expand form
   const toggleExpand = (section) => {
-    setIsExpanded({...isExpanded, [section]: !isExpanded[section]} )
-  }
+    setIsExpanded({ ...isExpanded, [section]: !isExpanded[section] });
+  };
 
   const clearCV = () => {
     // Reset each section individually
@@ -48,7 +56,7 @@ function App() {
     list: personalDetails,
     handleInputChange: handlePDInputChange,
     resetList: handlePDResetList,
-  } = useFormLogic(examplePersonalDetails)
+  } = useFormLogic(examplePersonalDetails);
 
   // Summary section state and functions
   const {
@@ -120,30 +128,34 @@ function App() {
     handleDeleteItem: handleSkillDeleteItem,
     resetList: handleSkillResetList,
   } = useFormLogic(exampleSkill);
- 
+
   return (
     <>
-      <div className='edit-container'>
-        <div className='control-buttons'>
+      <div className="edit-container">
+        <div className="control-buttons">
           <button onClick={clearCV}>Clear CV</button>
-          <button onClick={() => {handlePrint()}}>Download CV</button>
+          <button
+            onClick={() => {
+              handlePrint();
+            }}
+          >
+            Download CV
+          </button>
         </div>
 
         <PersonalDetailsEdit
-          data = {personalDetails}
+          data={personalDetails}
           handleInputChange={handlePDInputChange}
           isExpanded={isExpanded.personalDetails}
-          toggleExpand={() => toggleExpand("personalDetails")}
-        >  
-        </PersonalDetailsEdit>
+          toggleExpand={() => toggleExpand('personalDetails')}
+        ></PersonalDetailsEdit>
 
         <SummaryEdit
           data={summary}
           handleInputChange={handleSummaryInputChange}
           isExpanded={isExpanded.summary}
-          toggleExpand={() => toggleExpand("summary")}
-        >
-        </SummaryEdit>
+          toggleExpand={() => toggleExpand('summary')}
+        ></SummaryEdit>
 
         <EducationEdit
           list={educationList}
@@ -158,10 +170,9 @@ function App() {
           handleAddItem={handleAddEducation}
           handleDeleteItem={handleEducationDeleteItem}
           isExpanded={isExpanded.education}
-          toggleExpand={() => toggleExpand("education")}
-        >  
-        </EducationEdit>
-        
+          toggleExpand={() => toggleExpand('education')}
+        ></EducationEdit>
+
         <ExperienceEdit
           list={experienceList}
           showForm={experienceShowForm}
@@ -175,9 +186,8 @@ function App() {
           handleAddItem={handleAddExperience}
           handleDeleteItem={handleExperienceDeleteItem}
           isExpanded={isExpanded.experience}
-          toggleExpand={() => toggleExpand("experience")}
-        >
-        </ExperienceEdit>
+          toggleExpand={() => toggleExpand('experience')}
+        ></ExperienceEdit>
 
         <ProjectsEdit
           list={projectList}
@@ -192,9 +202,8 @@ function App() {
           handleAddItem={handleAddProject}
           handleDeleteItem={handleProjectDeleteItem}
           isExpanded={isExpanded.projects}
-          toggleExpand={() => toggleExpand("projects")}
-        >
-        </ProjectsEdit>
+          toggleExpand={() => toggleExpand('projects')}
+        ></ProjectsEdit>
 
         <SkillsEdit
           list={skillList}
@@ -209,7 +218,7 @@ function App() {
           handleAddItem={handleAddSkill}
           handleDeleteItem={handleSkillDeleteItem}
           isExpanded={isExpanded.skills}
-          toggleExpand={() => toggleExpand("skills")}
+          toggleExpand={() => toggleExpand('skills')}
         ></SkillsEdit>
       </div>
 
@@ -223,7 +232,7 @@ function App() {
         skillList={skillList}
       />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

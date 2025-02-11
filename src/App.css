@@ -205,16 +205,19 @@ ul {
   gap: 15px;
 }
 
-.education-input .start-end-container, .form-button-container, .start-end-container {
+.education-input .start-end-container,
+.form-button-container,
+.start-end-container {
   display: flex;
   gap: 20px;
 }
 
-.start-end-container > div  {
+.start-end-container > div {
   flex: 1;
 }
 
-.form-cancel, .form-save {
+.form-cancel,
+.form-save {
   padding: 10px 10px;
   border: 1px solid black;
   border-radius: 5px;
@@ -230,7 +233,7 @@ ul {
 }
 
 /* education, experience, projects container */
-.items-container  {
+.items-container {
   display: flex;
   flex-direction: column;
   gap: 10px;

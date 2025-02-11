@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const CV = React.forwardRef((props, ref) => {
   const {
@@ -43,7 +43,7 @@ const CV = React.forwardRef((props, ref) => {
                 <p>{education.degree}</p>
               </div>
               <p className="date-container">
-                {education["start-date"]} - {education["end-date"]}
+                {education['start-date']} - {education['end-date']}
               </p>
             </li>
           ))}
@@ -60,7 +60,7 @@ const CV = React.forwardRef((props, ref) => {
                 <p>{experience.description}</p>
               </div>
               <p className="date-container">
-                {experience["start-date"]} - {experience["end-date"]}
+                {experience['start-date']} - {experience['end-date']}
               </p>
             </li>
           ))}
@@ -79,7 +79,7 @@ const CV = React.forwardRef((props, ref) => {
                 <p>{project.description}</p>
               </div>
               <p className="date-container">
-                {project["start-date"]} - {project["end-date"]}
+                {project['start-date']} - {project['end-date']}
               </p>
             </li>
           ))}
@@ -104,6 +104,6 @@ const CV = React.forwardRef((props, ref) => {
   );
 });
 
-CV.displayName = "CV";
+CV.displayName = 'CV';
 
 export default CV;
