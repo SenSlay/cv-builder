@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import InputGroup from './InputGroup';
 
-export default function ProjectsEdit({ list, showForm, mode, formIndex, handleShowForm, handleCloseForm, handleCancelForm, handleInputChange, handleNewInputChange, handleAddItem, handleDeleteItem }) {
+export default function ProjectsEdit({ list, showForm, mode, formIndex, handleShowForm, handleCloseForm, handleCancelForm, handleInputChange, handleNewInputChange, handleAddItem, handleDeleteItem, isExpanded, toggleExpand}) {
   const initialNewProject = {
     name: '',
     tools: '',
@@ -13,7 +13,15 @@ export default function ProjectsEdit({ list, showForm, mode, formIndex, handleSh
 
   return (
     <div className="projects-input edit-section">
-        <h2>Projects</h2>
+        <div className="section-header" onClick={toggleExpand}>
+              <h2>Projects</h2>
+              <button className="toggle-button">
+                {isExpanded ? '▼' : '►'}
+              </button>
+            </div>
+
+        {isExpanded && (
+          <>
         {!showForm && (
               <ul className='projects-container items-container'>
                 {list.map((project, index) => (
@@ -28,7 +36,7 @@ export default function ProjectsEdit({ list, showForm, mode, formIndex, handleSh
               </ul>
             )}
             {showForm && (
-                <form name='project' onSubmit={mode === 'edit' ? null : (e) => handleAddItem(e, newProject, setNewProject, initialNewProject)} className='project-form'>
+                <form name='project' onSubmit={mode === 'edit' ? null : (e) => handleAddItem(e, newProject, setNewProject, initialNewProject)} className='project-form section-form'>
                     <InputGroup label='Name' type='text' id='name' name='name' value={mode === 'edit' ? list[formIndex].name : newProject.name} onChange={mode === 'edit' ? handleInputChange : (e) => handleNewInputChange(e, newProject, setNewProject)}></InputGroup>
                     <InputGroup label='Tools' type='text' id='tools' name='tools' value={mode === 'edit' ? list[formIndex].tools : newProject.tools} onChange={mode === 'edit' ? handleInputChange : (e) => handleNewInputChange(e, newProject, setNewProject)}></InputGroup>
                     <div className='start-end-container'>
@@ -45,6 +53,8 @@ export default function ProjectsEdit({ list, showForm, mode, formIndex, handleSh
             {!showForm && (
                 <button className='add-button' onClick={() => handleShowForm('add')}><i className="fa-solid fa-plus"></i>  Project</button>
             )}
+          </>
+        )}
     </div>
   )
 }
