@@ -1,13 +1,9 @@
 import { useState } from 'react'
 import InputGroup from './InputGroup';
+import { emptyDataCV } from '../exampleCvData';
 
 export default function EducationEdit({ list, showForm, mode, formIndex, handleShowForm, handleCloseForm, handleCancelForm, handleInputChange, handleNewInputChange, handleAddItem, handleDeleteItem, isExpanded, toggleExpand}) {
-    const initialNewEducation = {
-        school: '',
-        degree: '',
-        'start-date': '',
-        'end-date': '',
-    }
+    const initialNewEducation = emptyDataCV.educationList;
     const [newEducation, setNewEducation] = useState(initialNewEducation);
     
     return (

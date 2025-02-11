@@ -1,14 +1,9 @@
 import { useState } from 'react'
 import InputGroup from './InputGroup';
+import { emptyDataCV } from '../exampleCvData';
 
 export default function ProjectsEdit({ list, showForm, mode, formIndex, handleShowForm, handleCloseForm, handleCancelForm, handleInputChange, handleNewInputChange, handleAddItem, handleDeleteItem, isExpanded, toggleExpand}) {
-  const initialNewProject = {
-    name: '',
-    tools: '',
-    'start-date': '',
-    'end-date': '',
-    description: ''
-  };
+  const initialNewProject = emptyDataCV.projectList;
   const [newProject, setNewProject] = useState(initialNewProject);
 
   return (

@@ -1,14 +1,9 @@
 import { useState } from 'react'
 import InputGroup from './InputGroup';
+import { emptyDataCV } from '../exampleCvData';
 
 export default function ExperienceEdit({ list, showForm, mode, formIndex, handleShowForm, handleCloseForm, handleCancelForm, handleInputChange, handleNewInputChange, handleAddItem, handleDeleteItem, isExpanded, toggleExpand}) {
-    const initialNewExperience = {
-        company: '',
-        position: '',
-        'start-date': '',
-        'end-date': '',
-        description: ''
-    };
+    const initialNewExperience = emptyDataCV.experienceList;
     const [newExperience, setNewExperience] = useState(initialNewExperience);
 
     return (

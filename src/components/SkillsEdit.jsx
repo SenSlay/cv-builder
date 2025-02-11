@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import InputGroup from './InputGroup';
+import { emptyDataCV } from '../exampleCvData';
 
 export default function SkillsEdit({ list, showForm, mode, formIndex, handleShowForm, handleCloseForm, handleCancelForm, handleInputChange, handleNewInputChange, handleAddItem, handleDeleteItem, isExpanded, toggleExpand}) {
-  const initialNewSkill = {
-    category: '',
-    skills: ''
-  };
+  const initialNewSkill = emptyDataCV.experience
   const [newSkill, setNewSkill] = useState(initialNewSkill);
 
   return (
