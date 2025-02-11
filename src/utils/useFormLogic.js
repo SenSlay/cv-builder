@@ -16,8 +16,13 @@ export default function useFormLogic(initialList) {
     setShowForm(true);
   };
 
-  const resetList = (emptyList) => {
-    setList(emptyList);
+  const resetList = (emptyValue) => {
+    if (typeof emptyValue === 'object' && emptyValue !== null) {
+      // For personal details and summary
+      setList({...emptyValue})
+    } else {
+      setList([]);
+    }
   };
 
   // Handle closing the form
@@ -70,6 +75,9 @@ export default function useFormLogic(initialList) {
     if (window.confirm('Are you sure you want to delete this experience?')) {
       const updatedList = list.filter((_, i) => i !== index);
       setList(updatedList);
+
+      setFormIndex(null); 
+      initialDataRef.current = null;
     }
   };
 
