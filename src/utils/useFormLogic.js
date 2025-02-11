@@ -16,6 +16,10 @@ export default function useFormLogic(initialList) {
     setShowForm(true);
   };
 
+  const resetList = (emptyList) => {
+    setList(emptyList);
+  };
+
   // Handle closing the form
   const handleCloseForm = () => {
     setShowForm(false);
@@ -82,5 +86,6 @@ export default function useFormLogic(initialList) {
     handleNewInputChange,
     handleAddItem,
     handleDeleteItem,
+    resetList,
   };
 }
