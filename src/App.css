@@ -32,6 +32,7 @@
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
+  color: black;
   background-color: white;
   border: 1px solid black;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -91,6 +92,7 @@
 .input-group {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .input-group label {
@@ -166,6 +168,7 @@ ul {
 
 .cv-section > h2 {
   font-size: 18px;
+  font-weight: 500;
   text-transform: uppercase;
   color: hsl(0, 0%, 20%);
   border-bottom: 1px solid black;
@@ -205,11 +208,11 @@ ul {
   gap: 15px;
 }
 
-.education-input .start-end-container,
-.form-button-container,
-.start-end-container {
+.start-end-container,
+.form-button-container {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .start-end-container > div {
@@ -260,6 +263,8 @@ ul {
   font-size: 18px;
   border: none;
   cursor: pointer;
+  color: black;
+  background-color: transparent;
 }
 
 /* CV Experience info section */
@@ -332,6 +337,7 @@ ul {
 .toggle-button {
   border: none;
   background-color: transparent;
+  color: black;
 }
 
 @media screen and (max-width: 767px) {
@@ -342,5 +348,9 @@ ul {
 
   #root > div {
     width: 80%;
+  }
+
+  .form-button-container {
+    justify-content: center;
   }
 }
