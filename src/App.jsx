@@ -6,7 +6,7 @@ import ExperienceEdit from './components/ExperienceEdit';
 import ProjectsEdit from './components/ProjectsEdit';
 import SkillsEdit from './components/SkillsEdit';
 import useFormLogic from './utils/useFormLogic';
-import { exampleSummary, examplePersonalDetails, exampleEducation, exampleExperience, exampleProject, exampleSkill } from './exampleCvData';
+import { exampleSummary, examplePersonalDetails, exampleEducation, exampleExperience, exampleProject, exampleSkill, emptyDataCV } from './exampleCvData';
 import { useRef, useState} from "react";
 import { useReactToPrint } from "react-to-print";
 import CV from './components/CV';
@@ -33,16 +33,28 @@ function App() {
     setIsExpanded({...isExpanded, [section]: !isExpanded[section]} )
   }
 
+  const clearCV = () => {
+    // Reset each section individually
+    handlePDResetList(emptyDataCV.personalDetails); // Personal Details
+    handleSummaryResetList(emptyDataCV.summary); // Summary
+    handleEducationResetList(emptyDataCV.educationList); // Education
+    handleExperienceResetList(emptyDataCV.experienceList); // Experience
+    handleProjectResetList(emptyDataCV.projectList); // Projects
+    handleSkillResetList(emptyDataCV.skillList); // Skills
+  };
+
   // Personal Details section state and functions
   const {
     list: personalDetails,
     handleInputChange: handlePDInputChange,
+    resetList: handlePDResetList,
   } = useFormLogic(examplePersonalDetails)
 
   // Summary section state and functions
   const {
     list: summary,
     handleInputChange: handleSummaryInputChange,
+    resetList: handleSummaryResetList,
   } = useFormLogic(exampleSummary);
 
   // Education section state and functions
@@ -58,6 +70,7 @@ function App() {
     handleNewInputChange: handleEducationNewInputChange,
     handleAddItem: handleAddEducation,
     handleDeleteItem: handleEducationDeleteItem,
+    resetList: handleEducationResetList,
   } = useFormLogic(exampleEducation);
 
   // Experience section state and functions
@@ -73,6 +86,7 @@ function App() {
     handleNewInputChange: handleExperienceNewInputChange,
     handleAddItem: handleAddExperience,
     handleDeleteItem: handleExperienceDeleteItem,
+    resetList: handleExperienceResetList,
   } = useFormLogic(exampleExperience);
 
   // Projects section state and functions
@@ -88,6 +102,7 @@ function App() {
     handleNewInputChange: handleProjectNewInputChange,
     handleAddItem: handleAddProject,
     handleDeleteItem: handleProjectDeleteItem,
+    resetList: handleProjectResetList,
   } = useFormLogic(exampleProject);
 
   // Skills section state and functions
@@ -103,17 +118,15 @@ function App() {
     handleNewInputChange: handleSkillNewInputChange,
     handleAddItem: handleAddSkill,
     handleDeleteItem: handleSkillDeleteItem,
+    resetList: handleSkillResetList,
   } = useFormLogic(exampleSkill);
  
   return (
     <>
       <div className='edit-container'>
         <div className='control-buttons'>
-          <button>Clear CV</button>
-          <button onClick={() => {
-            console.log("Print button clicked"); // Debug
-            handlePrint();
-          }}>Download CV</button>
+          <button onClick={clearCV}>Clear CV</button>
+          <button onClick={() => {handlePrint()}}>Download CV</button>
         </div>
 
         <PersonalDetailsEdit
