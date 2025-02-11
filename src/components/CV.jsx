@@ -55,8 +55,8 @@ const CV = React.forwardRef((props, ref) => {
           {experienceList.map((experience, index) => (
             <li key={index}>
               <div>
-                <h3>{experience.company}</h3>
-                <h4>{experience.position}</h4>
+                <h3>{experience.position}</h3>
+                <h4>{experience.company}</h4>
                 <p>{experience.description}</p>
               </div>
               <p className="date-container">
@@ -74,7 +74,7 @@ const CV = React.forwardRef((props, ref) => {
               <div>
                 <div>
                   <h3>{project.name}</h3>
-                  <p>| {project.tools}</p>
+                  <h4>| {project.tools}</h4>
                 </div>
                 <p>{project.description}</p>
               </div>

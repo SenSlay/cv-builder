@@ -26,7 +26,7 @@ export default function ExperienceEdit({ list, showForm, mode, formIndex, handle
                   <ul className='experience-container items-container'>
                     {list.map((experience, index) => (
                         <li key={index}>
-                            <p>{experience.company}</p>
+                            <p>{experience.position}</p>
                             <div className='item-buttons'>
                                 <button onClick={() => handleShowForm('edit', index)}><i className="fa-regular fa-pen-to-square"></i></button>
                                 <button onClick={() => handleDeleteItem(index)}><i className="fa-solid fa-trash"></i></button>

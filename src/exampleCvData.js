@@ -8,7 +8,7 @@ const examplePersonalDetails = {
     fullName: 'Irvan Castro',
     email: 'email@gmail.com',
     phoneNumber: '+63 123 456 7890',
-    address: 'Dubai, UAE',
+    address: 'Earthy',
 }
 
 // Example education data
@@ -24,18 +24,18 @@ const exampleEducation = [
 // Example experience data
 const exampleExperience = [
   {
-    company: 'Web Developer Intern',
-    position: 'Company',
-    'start-date': 'Oct 23',
-    'end-date': 'Dec 10',
+    position: 'Web Developer Intern',
+    company: 'Company',
+    'start-date': 'Before',
+    'end-date': 'Before',
     description: 'Created front-end components using React.'
   },
   {
-    company: 'ProbeCX Ph',
     position: 'Customer Service Representative',
-    'start-date': 'Oct 10',
-    'end-date': 'Dec 10',
-    description: 'Handled customer inquiries. Deez nuts, damn daniel, skibidi sigma.'
+    company: 'Company',
+    'start-date': 'Before',
+    'end-date': 'Before',
+    description: 'Handled deez nuts.'
   },
 ]
 
