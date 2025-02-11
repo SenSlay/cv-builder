@@ -63,27 +63,11 @@ export default function ExperienceEdit({
               className="experience-form section-form"
             >
               <InputGroup
-                label="Company"
-                type="text"
-                id="company"
-                name="company"
-                value={
-                  mode === 'edit'
-                    ? list[formIndex].company
-                    : newExperience.company
-                }
-                onChange={
-                  mode === 'edit'
-                    ? handleInputChange
-                    : (e) =>
-                        handleNewInputChange(e, newExperience, setNewExperience)
-                }
-              ></InputGroup>
-              <InputGroup
                 label="Position"
                 type="text"
                 id="position"
                 name="position"
+                required='required'
                 value={
                   mode === 'edit'
                     ? list[formIndex].position
@@ -96,6 +80,23 @@ export default function ExperienceEdit({
                         handleNewInputChange(e, newExperience, setNewExperience)
                 }
               ></InputGroup>
+                <InputGroup
+                  label="Company"
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={
+                    mode === 'edit'
+                      ? list[formIndex].company
+                      : newExperience.company
+                  }
+                  onChange={
+                    mode === 'edit'
+                      ? handleInputChange
+                      : (e) =>
+                          handleNewInputChange(e, newExperience, setNewExperience)
+                  }
+                ></InputGroup>
               <div className="start-end-container">
                 <InputGroup
                   label="start-date"
@@ -160,11 +161,10 @@ export default function ExperienceEdit({
               <div className="form-button-container">
                 <button
                   type="button"
-                  onClick={
-                    mode === 'edit'
-                      ? handleCancelForm
-                      : () => handleCloseForm('experience')
-                  }
+                  onClick={() => {
+                    handleCancelForm();
+                    setNewExperience(initialNewExperience)
+                  }}
                   className="form-cancel"
                 >
                   Cancel

@@ -50,6 +50,7 @@ export default function EducationEdit({
             <form
               name="education"
               className="section-form education-form"
+              required='required'
               onSubmit={
                 mode === 'edit'
                   ? null
@@ -132,11 +133,10 @@ export default function EducationEdit({
               <div className="form-button-container">
                 <button
                   type="button"
-                  onClick={
-                    mode === 'edit'
-                      ? handleCancelForm
-                      : () => handleCloseForm('education')
-                  }
+                  onClick={() => {
+                    handleCancelForm();
+                    setNewEducation(initialNewEducation)
+                  }}
                   className="form-cancel"
                 >
                   Cancel

@@ -67,6 +67,7 @@ export default function ProjectsEdit({
                 type="text"
                 id="name"
                 name="name"
+                required='required'
                 value={mode === 'edit' ? list[formIndex].name : newProject.name}
                 onChange={
                   mode === 'edit'
@@ -143,11 +144,10 @@ export default function ProjectsEdit({
               <div className="form-button-container">
                 <button
                   type="button"
-                  onClick={
-                    mode === 'edit'
-                      ? handleCancelForm
-                      : () => handleCloseForm('project')
-                  }
+                  onClick={() => {
+                    handleCancelForm();
+                    setNewProject(initialNewProject)
+                  }}
                   className="form-cancel"
                 >
                   Cancel

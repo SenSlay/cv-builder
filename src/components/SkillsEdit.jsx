@@ -17,7 +17,7 @@ export default function SkillsEdit({
   isExpanded,
   toggleExpand,
 }) {
-  const initialNewSkill = emptyDataCV.experience;
+  const initialNewSkill = emptyDataCV.skillList;
   const [newSkill, setNewSkill] = useState(initialNewSkill);
 
   return (
@@ -76,6 +76,7 @@ export default function SkillsEdit({
                 type="text"
                 id="skills"
                 name="skills"
+                required="required"
                 value={
                   mode === 'edit' ? list[formIndex].skills : newSkill.skills
                 }
@@ -88,11 +89,10 @@ export default function SkillsEdit({
               <div className="form-button-container">
                 <button
                   type="button"
-                  onClick={
-                    mode === 'edit'
-                      ? handleCancelForm
-                      : () => handleCloseForm('skill')
-                  }
+                  onClick={() => {
+                    handleCancelForm();
+                    setNewSkill(initialNewSkill)
+                  }}
                   className="form-cancel"
                 >
                   Cancel
