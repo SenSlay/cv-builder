@@ -326,6 +326,7 @@ ul {
 
   .cv-container {
     width: 100%;
+    min-height: 100vh;
   }
 
   /* Remove unwanted elements, like buttons */
