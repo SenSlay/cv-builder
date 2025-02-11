@@ -7,7 +7,7 @@ import ProjectsEdit from './components/ProjectsEdit';
 import SkillsEdit from './components/SkillsEdit';
 import useFormLogic from './utils/useFormLogic';
 import { exampleSummary, examplePersonalDetails, exampleEducation, exampleExperience, exampleProject, exampleSkill } from './exampleCvData';
-import { useRef} from "react";
+import { useRef, useState} from "react";
 import { useReactToPrint } from "react-to-print";
 import CV from './components/CV';
 
@@ -17,7 +17,22 @@ function App() {
   const handlePrint = useReactToPrint({
     contentRef: componentRef, 
   });
-  
+
+  // state for expand form
+  const [isExpanded, setIsExpanded] = useState({
+    summary: false,
+    personalDetails: false,
+    education: false,
+    experience: false,
+    projects: false,
+    skills: false,
+  });
+
+  // Toggle expand form
+  const toggleExpand = (section) => {
+    setIsExpanded({...isExpanded, [section]: !isExpanded[section]} )
+  }
+
   // Summary section state and functions
   const {
     list: summary,
@@ -94,7 +109,7 @@ function App() {
     <>
       <div className='edit-container'>
         <div className='control-buttons'>
-          <button>Clear Resume</button>
+          <button>Clear CV</button>
           <button onClick={() => {
             console.log("Print button clicked"); // Debug
             handlePrint();
@@ -104,12 +119,16 @@ function App() {
         <SummaryEdit
           data={summary}
           handleInputChange={handleSummaryInputChange}
+          isExpanded={isExpanded.summary}
+          toggleExpand={() => toggleExpand("summary")}
         >
         </SummaryEdit>
 
         <PersonalDetailsEdit
           data = {personalDetails}
           handleInputChange={handlePDInputChange}
+          isExpanded={isExpanded.personalDetails}
+          toggleExpand={() => toggleExpand("personalDetails")}
         >  
         </PersonalDetailsEdit>
 
@@ -125,6 +144,8 @@ function App() {
           handleNewInputChange={handleEducationNewInputChange}
           handleAddItem={handleAddEducation}
           handleDeleteItem={handleEducationDeleteItem}
+          isExpanded={isExpanded.education}
+          toggleExpand={() => toggleExpand("education")}
         >  
         </EducationEdit>
         
@@ -140,6 +161,8 @@ function App() {
           handleNewInputChange={handleExperienceNewInputChange}
           handleAddItem={handleAddExperience}
           handleDeleteItem={handleExperienceDeleteItem}
+          isExpanded={isExpanded.experience}
+          toggleExpand={() => toggleExpand("experience")}
         >
         </ExperienceEdit>
 
@@ -155,6 +178,8 @@ function App() {
           handleNewInputChange={handleProjectNewInputChange}
           handleAddItem={handleAddProject}
           handleDeleteItem={handleProjectDeleteItem}
+          isExpanded={isExpanded.projects}
+          toggleExpand={() => toggleExpand("projects")}
         >
         </ProjectsEdit>
 
@@ -170,8 +195,11 @@ function App() {
           handleNewInputChange={handleSkillNewInputChange}
           handleAddItem={handleAddSkill}
           handleDeleteItem={handleSkillDeleteItem}
+          isExpanded={isExpanded.skills}
+          toggleExpand={() => toggleExpand("skills")}
         ></SkillsEdit>
       </div>
+
       <CV
         ref={componentRef}
         personalDetails={personalDetails}
