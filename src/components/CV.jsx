@@ -74,7 +74,7 @@ const CV = React.forwardRef((props, ref) => {
               <div>
                 <div>
                   <h3>{project.name}</h3>
-                  <h4>| {project.tools}</h4>
+                  <h4>{project.tools && '| ' + project.tools}</h4>
                 </div>
                 <p>{project.description}</p>
               </div>
