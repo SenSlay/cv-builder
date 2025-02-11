@@ -58,4 +58,46 @@ const exampleSkill = [
   }
 ]
 
-export { exampleSummary, examplePersonalDetails, exampleEducation, exampleExperience, exampleProject, exampleSkill }
+const emptyDataCV = {
+  personalDetails: {
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    address: ''
+  },
+  summary: {
+    description: ''
+  },
+  educationList: [
+    {
+      school: '',
+      degree: '',
+      startDate: '',
+      endDate: ''
+    }
+  ],
+  experienceList: [
+    {
+      company: '',
+      role: '',
+      description: '',
+      startDate: '',
+      endDate: ''
+    }
+  ],
+  projectList: [
+    {
+      title: '',
+      description: '',
+      link: ''
+    }
+  ],
+  skillList: [
+    {
+      category: '',
+      skills: ''
+    }
+  ]
+};
+
+export { exampleSummary, examplePersonalDetails, exampleEducation, exampleExperience, exampleProject, exampleSkill, emptyDataCV }
