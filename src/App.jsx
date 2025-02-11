@@ -20,8 +20,8 @@ function App() {
 
   // state for expand form
   const [isExpanded, setIsExpanded] = useState({
+    personalDetails: true,
     summary: false,
-    personalDetails: false,
     education: false,
     experience: false,
     projects: false,
@@ -33,17 +33,17 @@ function App() {
     setIsExpanded({...isExpanded, [section]: !isExpanded[section]} )
   }
 
-  // Summary section state and functions
-  const {
-    list: summary,
-    handleInputChange: handleSummaryInputChange,
-  } = useFormLogic(exampleSummary);
-
   // Personal Details section state and functions
   const {
     list: personalDetails,
     handleInputChange: handlePDInputChange,
   } = useFormLogic(examplePersonalDetails)
+
+  // Summary section state and functions
+  const {
+    list: summary,
+    handleInputChange: handleSummaryInputChange,
+  } = useFormLogic(exampleSummary);
 
   // Education section state and functions
   const {
@@ -116,14 +116,6 @@ function App() {
           }}>Download CV</button>
         </div>
 
-        <SummaryEdit
-          data={summary}
-          handleInputChange={handleSummaryInputChange}
-          isExpanded={isExpanded.summary}
-          toggleExpand={() => toggleExpand("summary")}
-        >
-        </SummaryEdit>
-
         <PersonalDetailsEdit
           data = {personalDetails}
           handleInputChange={handlePDInputChange}
@@ -131,6 +123,14 @@ function App() {
           toggleExpand={() => toggleExpand("personalDetails")}
         >  
         </PersonalDetailsEdit>
+
+        <SummaryEdit
+          data={summary}
+          handleInputChange={handleSummaryInputChange}
+          isExpanded={isExpanded.summary}
+          toggleExpand={() => toggleExpand("summary")}
+        >
+        </SummaryEdit>
 
         <EducationEdit
           list={educationList}
