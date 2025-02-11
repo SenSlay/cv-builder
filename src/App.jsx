@@ -45,10 +45,10 @@ function App() {
     // Reset each section individually
     handlePDResetList(emptyDataCV.personalDetails); // Personal Details
     handleSummaryResetList(emptyDataCV.summary); // Summary
-    handleEducationResetList(emptyDataCV.educationList); // Education
-    handleExperienceResetList(emptyDataCV.experienceList); // Experience
-    handleProjectResetList(emptyDataCV.projectList); // Projects
-    handleSkillResetList(emptyDataCV.skillList); // Skills
+    handleEducationResetList(); // Education
+    handleExperienceResetList(); // Experience
+    handleProjectResetList(); // Projects
+    handleSkillResetList(); // Skills
   };
 
   // Personal Details section state and functions
